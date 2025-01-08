@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import dj_data
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,7 +90,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default']=
+DATABASES['default']=dj_database_url.parse('postgresql://project_cambaro_user:llHuJVcwl1EavQocSEkzwnHZChbXrvsI@dpg-ctv1mmdds78s738m44j0-a.oregon-postgres.render.com/project_cambaro')
 
 # added
 # DATABASES = {

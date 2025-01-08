@@ -75,7 +75,7 @@ class Staff(models.Model):
 
 class Medicine(models.Model):
     name = models.CharField(max_length=50)
-    generic_name = models.CharField(blank=True)
+    generic_name = models.CharField(max_length=50)
     dosage = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
     date_added = models.DateField(auto_now_add=True)
@@ -112,7 +112,7 @@ class ChildVaccineHistory(models.Model):
     
 class DocumentRequest(models.Model):
     DOCUMENT_CHOICES = [
-        ('doc1', 'doc1'),
+        ('Indigency', 'Indigency'),
         ('doc2', 'doc2'),
     ]
 
