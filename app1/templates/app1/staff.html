@@ -1,0 +1,74 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- header -->
+    <a href="{% url 'staff' %}">
+        <h1 class="text-center font-bold text-3xl p-5">LIST OF STAFF</h1>
+    </a>
+    
+    <div class="flex justify-between pt-5 mb-5">
+        <div>
+            <a href="{% url 'add-staff' %}">
+                <div class="bg-green-500 text-white font-bold py-2 px-4 rounded">
+                    Add New Staff
+                </div>
+            </a>
+        </div>
+        
+        <div>
+            <form method="GET" action="{% url 'staff' %}">
+                <input class="" type="text" name="q" placeholder="Search Resident...">
+            </form>
+        </div>
+    </div>
+    
+    <!-- resident list -->
+    <div class="pt-5 border p-5 rounded-xl shadow-md">
+        <div class="grid grid-cols-8 mb-5 font-bold border-b border-gray-300 pb-3">
+            <div>Last Name</div>
+            <div>First Name</div>
+            <div>Middle Name</div>
+            <div>Birth Date</div>
+            <div>Gender</div>
+            <div>Role</div>
+            <div>Phone Number</div>
+            <div class="text-center">Actions</div>
+        </div>
+        
+        <div class="grid grid-cols-8 resident-grid gap-y-4">
+            {% for a in staff %}
+            <div>{{ a.last_name|title }}</div>
+            <div>{{ a.first_name|title }}</div>
+            <div>{{ a.middle_name|title }}</div>
+            <div>{{ a.birth_date }}</div>
+            <div>{{ a.gender }}</div>
+            <div>{{ a.role }}</div>
+            <div>{{ a.phone_number }}</div>
+            <div class="grid grid-cols-2">
+                <a href="{% url 'update-staff' a.id %}">
+                    <div class="bg-blue-500 text-white m-0.5 p-3 font-semibold rounded" align="center">
+                        <img src="{% static '/images/update.png' %}" alt="">
+                    </div>
+                </a>
+                <a href="{% url 'delete-staff' a.id %}">
+                    <div class="bg-red-500 text-white m-0.5 p-3 font-semibold rounded" align="center">
+                        <img src="{% static '/images/bin.png' %}" alt="">
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- {% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        });
+    </script>
+    {% endif %} -->
+
+{% endblock content %}

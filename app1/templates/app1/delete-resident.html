@@ -1,0 +1,48 @@
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+<header class="bg-red-500 text-white py-6 shadow-md">
+    <div class="container mx-auto">
+        <h1 class="text-center text-3xl font-bold">
+            Are You Sure You Want to Delete This Resident?
+        </h1>
+    </div>
+</header>
+
+<div class="mt-5 border p-5 rounded-xl shadow-xl">
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <!-- fields -->
+        {% for field in form %}
+            <div class="flex justify-between mb-4 mx-72">
+                <label for="{{ field.id_for_label }}" class="font-bold">
+                    {{ field.label }}
+                </label>
+                
+                <div class="ml-5">
+                    <p>{{ field.value }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- submit and cancel button -->
+        <div class="flex pt-5 justify-center space-x-4">
+            <input type="submit" value="Confirm" class="bg-green-500 text-white font-bold py-2 px-4 rounded">
+            <a href="{% url 'barangay-residents' %}" class="bg-red-500 text-white font-bold py-2 px-4 rounded text-center">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
+{% endblock content %}

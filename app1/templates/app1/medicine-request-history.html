@@ -1,0 +1,33 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<a href="{% url 'barangay-medicine-inventory' %}">
+    <h1 class="text-center font-bold text-3xl p-5">MEDICINE REQUEST HISTORY</h1>
+</a>
+
+<!-- medicine list -->
+<div class="pt-5 border p-5 rounded-xl shadow-md">
+    <div class="grid grid-cols-6 mb-5 font-bold border-b border-gray-300 pb-3 gap-x-10">
+        <div>Date Requested</div>
+        <div>Receiver</div>
+        <div>Medicine</div>
+        <div>Type</div>
+        <div>Dosage</div>
+        <div>Quantity</div>
+    </div>
+    
+    <div class="grid grid-cols-6 resident-grid gap-y-4 gap-x-10">
+        {% for request in medicine_requests %}
+        <div>{{ request.request_date }}</div>
+        <div>{{ request.resident.last_name }}, {{ request.resident.first_name }} {{ request.resident.middle_name }}</div>
+        <div>{{ request.medicine.generic_name }}</div>
+        <div>{{ request.medicine.type }}</div>
+        <div>{{ request.medicine.dosage }}</div>
+        <div>{{ request.quantity }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

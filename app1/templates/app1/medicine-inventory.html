@@ -1,0 +1,90 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<a href="{% url 'barangay-medicine-inventory' %}">
+    <h1 class="text-center font-bold text-3xl p-5">MEDICINE INVENTORY</h1>
+</a>
+
+<div class="flex justify-between mt-5 mb-5">
+    <div>
+        <a href="{% url 'barangay-add-medicine' %}">
+            <div class="bg-green-500 text-white font-bold py-2 px-4 rounded">
+                Add Medicine
+            </div>
+        </a>
+    </div>
+    
+    <div>
+        <a href="{% url 'barangay-medicine-request' %}">
+            <div class="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                Request Medicine
+            </div>
+        </a>
+    </div>
+    
+    <div>
+        <a href="{% url 'barangay-medicine-request-history' %}">
+            <div class="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                History
+            </div>
+        </a>
+    </div>
+    
+    <div>
+        <form method="GET" action="">
+            <input class="" type="text" name="q" placeholder="Search Medicine...">
+        </form>
+    </div>
+</div>
+
+<!-- medicine list -->
+<div class="pt-5 border p-5 rounded-xl shadow-md">
+    <div class="grid grid-cols-8 mb-5 font-bold border-b border-gray-300 pb-3 gap-x-3">
+        <div>Medicine</div>
+        <div>Generic Name</div>
+        <div>Dosage</div>
+        <div>Type</div>
+        <div>Date Added</div>
+        <div>Expiry Date</div>
+        <div>Quantity</div>
+        <div class="text-center">Actions</div>
+    </div>
+    
+    <div class="grid grid-cols-8 resident-grid gap-y-4 gap-x-3">
+        {% for medicine in medicines %}
+        <div>{{ medicine.name }}</div>
+        <div>{{ medicine.generic_name }}</div>
+        <div>{{ medicine.dosage }}</div>
+        <div>{{ medicine.type }}</div>
+        <div>{{ medicine.date_added }}</div>
+        <div>{{ medicine.expiry_date }}</div>
+        <div>{{ medicine.quantity }}</div>
+        <div class="grid grid-cols-2">
+            <a href="{% url 'barangay-update-medicine' medicine.id %}">
+                <div class="bg-blue-500 text-white m-0.5 p-3 font-semibold rounded" align="center">
+                    <img src="{% static '/images/update.png' %}" alt="">
+                </div>
+            </a>
+            <a href="{% url 'barangay-delete-medicine' medicine.id %}">
+                <div class="bg-red-500 text-white m-0.5 p-3 font-semibold rounded" align="center">
+                    <img src="{% static '/images/bin.png' %}" alt="">
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
+{% endblock content %}

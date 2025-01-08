@@ -1,0 +1,76 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Barangay Cambaro Management System</title>
+		{% tailwind_css %}
+        <link rel="stylesheet" href="{% static 'css/residents.css' %}">
+        <!-- <script src="{% static 'js/test.js' %}" defer></script> -->
+    </head>
+    
+    <body class="grid grid-cols-[1fr,3fr] h-screen">
+        {% if request.user.is_authenticated %}
+        <!-- side navigation bar -->
+        <nav class="bg-gray-800 text-white p-5 flex flex-col h-full">
+            <!-- logo -->
+            <div class="mb-5">
+                <a href="{% url 'barangay-home' %}">
+                    <img src="{% static '/images/barangay-cambaro-logo-1.png' %}" alt="Barangay Cambaro Logo" class="w-32 mx-auto bg-white p-2 rounded">
+                </a>
+            </div>
+            
+            <!-- buttons -->
+            <ul class="flex-grow space-y-4">
+
+                <li>
+                    <a href="{% url 'barangay-home' %}" class="block py-2 px-4 rounded hover:bg-gray-700">Home</a>
+                </li>
+                
+                {% if request.user.username == 'admin' %}
+                <li>
+                    <a href="{% url 'barangay-residents' %}" class="block py-2 px-4 rounded hover:bg-gray-700">Residents</a>
+                </li>
+                <li>
+                    <a href="{% url 'staff' %}" class="block py-2 px-4 rounded hover:bg-gray-700">Staff</a>
+                </li>
+                {% endif %}
+                
+                {% if request.user.username == 'healthworker' or request.user.username == 'admin' %}
+                <li>
+                    <a href="{% url 'barangay-medicine-inventory' %}" class="block py-2 px-4 rounded hover:bg-gray-700">Medicine Inventory</a>
+                </li>
+                <li>
+                    <a href="{% url 'children-list' %}" class="block py-2 px-4 rounded hover:bg-gray-700">Child Vaccine Record</a>
+                </li>
+                {% endif %}
+                
+                {% if request.user.username == 'frontdesk' or request.user.username == 'admin' %}
+                <li>
+                    <a href="{% url 'document-request-history' %}" class="block py-2 px-4 rounded hover:bg-gray-700">Document Request</a>
+                </li>
+                {% endif %}
+
+            </ul>
+            
+            <ul class="mt-auto">
+                <li class="p-5">
+                    <a href="{% url 'logout' %}" class="block py-2 px-4 rounded bg-red-500 hover:bg-red-600 text-center">Log Out</a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- main content -->
+        <main class="p-5">
+            {% block content %} 
+            {% endblock content %}
+        </main>
+        
+        <script src=""></script>
+        {% else %}
+        You are not supposed to be here...
+        {% endif %}
+    </body>
+</html>

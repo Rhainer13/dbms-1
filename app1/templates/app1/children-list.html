@@ -1,0 +1,41 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- header -->
+<a href="{% url 'children-list' %}">
+    <h1 class="text-center font-bold text-3xl p-5">CHILD VACCINE RECORD</h1>
+</a>
+
+<div class="pt-5 border p-5 rounded-xl shadow-md">
+    <div class="grid grid-cols-3 mb-5 font-bold border-b border-gray-300 pb-3">
+        <div>Name</div>
+        <div class="text-center">View Visits</div>
+        <div class="text-center">Update Visit</div>
+    </div>
+
+
+    <div class="grid grid-cols-3 gap-y-4 gap-x-3">
+        {% for child in children %}
+        <div>{{ child.last_name|title }}, {{ child.first_name|title }} {{ child.middle_name|title }}</div>
+        
+        <div class="">
+            <a href="{% url 'child-vaccine-history' child.id %}">
+                <div class="bg-green-500 text-white mt-0 p-3 font-semibold rounded" align="center">
+                    <img src="{% static '/images/view.png' %}" alt="" width="30">
+                </div>
+            </a>
+        </div>
+
+        <div>
+            <a href="{% url 'update-visit' child.id %}">
+                <div class="bg-blue-500 text-white mt-0 p-3 font-semibold rounded" align="center">
+                    <img src="{% static '/images/add.png' %}" alt="" width="30">
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="text-center font-bold text-3xl p-5">HOME PAGE</h1>
+
+
+<div class="grid grid-cols-3 gap-10 m-3">
+
+    <div class="bg-green-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            Total Residents:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/total-population.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ resident_count }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-blue-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            Male:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/man.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ male_residents }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-violet-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            Female:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/woman.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ female_residents }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-yellow-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            Children:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/children.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ child_residents }}
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-red-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            Adults:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/adult.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ adult_residents }}
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-gray-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            Senior:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/senior.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ senior_residents }}
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+{% endblock content %}

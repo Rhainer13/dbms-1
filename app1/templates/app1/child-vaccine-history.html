@@ -1,0 +1,35 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="bg-green-500 text-white py-6 shadow-md mb-5">
+    <a href="{% url 'children-list' %}">
+        <div class="container mx-auto">
+            <h1 class="text-center text-3xl font-bold">
+                Vaccine History For - {{ resident.last_name|title }}, {{ resident.first_name|title }} {{ resident.middle_name|title }}
+            </h1>
+        </div>
+    </a>
+</header>
+
+<!-- medicine list -->
+<div class="pt-5 border p-5 rounded-xl shadow-md">
+    <div class="grid grid-cols-4 mb-5 font-bold border-b border-gray-300 pb-3 gap-x-10">
+        <div>Date</div>
+        <div>Visit #</div>
+        <div>Vaccine</div>
+        <div>Health Worker</div>
+    </div>
+    
+    <div class="grid grid-cols-4 resident-grid gap-y-4 gap-x-10">
+        {% for i in vaccine_history %}
+        <div>{{ i.date_given }}</div>
+        <div>{{ i.visit_number }}</div>
+        <div>{{ i.vaccine_name }}</div>
+        <div>{{ i.health_worker }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
