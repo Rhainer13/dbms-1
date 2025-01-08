@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -157,3 +158,5 @@ STATICFILES_DIRS = [
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATSTATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
