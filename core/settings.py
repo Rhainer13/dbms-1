@@ -158,6 +158,7 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    BASE_DIR / 'theme/static_src',
 ]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
