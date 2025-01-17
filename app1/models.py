@@ -113,7 +113,6 @@ class ChildVaccineHistory(models.Model):
 class DocumentRequest(models.Model):
     DOCUMENT_CHOICES = [
         ('Indigency', 'Indigency'),
-        ('doc2', 'doc2'),
     ]
 
     PURPOSE_CHOICES = [

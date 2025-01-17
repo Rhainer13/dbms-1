@@ -76,6 +76,11 @@ class ChildVaccineHistoryForm(forms.ModelForm):
             'date_given': forms.DateInput(attrs={'type': 'date', 'class': 'form-field'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Filter health_worker to only include staff with the role "Health Worker"
+        self.fields['health_worker'].queryset = Staff.objects.filter(role='Health Worker')
+
 class DocumentRequestForm(forms.ModelForm):
     class Meta:
         model = DocumentRequest
