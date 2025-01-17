@@ -1,3 +1,5 @@
+{% load static tailwind_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +19,11 @@
 
     <div class="flex items-center justify-center min-h-screen">
         <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
+            <!-- <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2> -->
+            <div class="mb-5">
+                    <img src="{% static '/images/barangay-cambaro-logo-1.png' %}" alt="Barangay Cambaro Logo" class="w-32 mx-auto bg-white p-2 rounded">
+            </div>
+
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="mb-4">
