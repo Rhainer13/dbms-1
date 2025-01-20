@@ -45,7 +45,7 @@
             <div class="text-center">Actions</div>
         </div>
         
-        <div class="grid grid-cols-8 resident-grid gap-y-4 gap-x-3">
+        <div class="grid grid-cols-8 resident-grid gap-y-4 gap-x-3 overflow-y-auto h-96">
             {% for resident in residents %}
             <div>{{ resident.last_name|title }}</div>
             <div>{{ resident.first_name|title }}</div>

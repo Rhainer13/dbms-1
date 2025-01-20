@@ -52,7 +52,7 @@
         <div class="text-center">Actions</div>
     </div>
     
-    <div class="grid grid-cols-8 resident-grid gap-y-4 gap-x-3">
+    <div class="grid grid-cols-8 resident-grid gap-y-4 gap-x-3 overflow-y-auto h-96">
         {% for medicine in medicines %}
         <div>{{ medicine.name }}</div>
         <div>{{ medicine.generic_name }}</div>
@@ -77,7 +77,7 @@
     </div>
 </div>
 
-{% if messages %}
+<!-- {% if messages %}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             {% for message in messages %}
@@ -85,6 +85,6 @@
             {% endfor %}
         });
     </script>
-{% endif %}
+{% endif %} -->
 
 {% endblock content %}

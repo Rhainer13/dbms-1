@@ -34,7 +34,7 @@
             <!-- <div class="text-center">Actions</div> -->
         </div>
         
-        <div class="grid grid-cols-4 resident-grid gap-y-4">
+        <div class="grid grid-cols-4 resident-grid gap-y-4 overflow-y-auto h-96">
             {% for request in document_requests %}
             <div>{{ request.request_date }}</div>
             <div>{{ request.resident.last_name|title }}, {{ request.resident.first_name|title }} {{ request.resident.middle_name|title }}</div>

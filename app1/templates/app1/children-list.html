@@ -15,7 +15,7 @@
     </div>
 
 
-    <div class="grid grid-cols-3 gap-y-4 gap-x-3">
+    <div class="grid grid-cols-3 gap-y-4 gap-x-3 overflow-y-auto h-96">
         {% for child in children %}
         <div>{{ child.last_name|title }}, {{ child.first_name|title }} {{ child.middle_name|title }}</div>
         

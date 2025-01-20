@@ -22,7 +22,7 @@
         <div>Health Worker</div>
     </div>
     
-    <div class="grid grid-cols-4 resident-grid gap-y-4 gap-x-10">
+    <div class="grid grid-cols-4 resident-grid gap-y-4 gap-x-10 overflow-y-auto h-96">
         {% for i in vaccine_history %}
         <div>{{ i.date_given }}</div>
         <div>{{ i.visit_number }}</div>
