@@ -22,6 +22,18 @@ class Resident(models.Model):
         ('Agbate', 'Agbate'),
         ('Gabi', 'Gabi'),
     ]
+
+    STATUS_CHOICES = [
+        ('None', 'None'),
+        ('Employed', 'Employed'),
+        ('Unemployed', 'Unemployed'),
+        ('PWD', 'PWD'),
+        ('OFW', 'OFW'),
+        ('Solo Parent', 'Solo Parent'),
+        ('Out of School Youth', 'Out of School Youth'),
+        ('Out of School Children', 'Out of School Children'),
+        ('Indigenous Person', 'Indigenous Person'),
+    ]
     
     phone_number_validator = RegexValidator(
         regex=r'^\d{11}$',
@@ -35,6 +47,7 @@ class Resident(models.Model):
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES, blank=False)
     purok = models.CharField(max_length=20, choices=PUROK_CHOICES, blank=False)
     phone_number = models.CharField(max_length=11, validators=[phone_number_validator])
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, blank=False)
     
     class Meta:
         ordering = ['last_name', 'first_name']

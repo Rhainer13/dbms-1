@@ -27,6 +27,9 @@ def index(request):
     # Filter residents less than 18 years old
     child_residents = Resident.objects.filter(birth_date__gt=eighteen_years_ago).count()
 
+    solo_parents = Resident.objects.filter(status='Solo Parent').count()
+    pwd = Resident.objects.filter(status='PWD').count()
+
     context = {
         'resident_count': resident_count,
         'male_residents': male_residents,
@@ -34,6 +37,8 @@ def index(request):
         'child_residents': child_residents,
         'adult_residents': adult_residents,
         'senior_residents': senior_residents,
+        'solo_parents': solo_parents,
+        'pwd': pwd,
     }
     return render(request, 'app1/index.html', context)
 
@@ -47,7 +52,8 @@ def residents(request):
             Q(last_name__icontains=q) |
             Q(phone_number__icontains=q) |
             Q(purok__icontains=q) |
-            Q(gender=q.title())
+            Q(gender=q.title()) |
+            Q(status__icontains=q)
         )
     else:
         residents = Resident.objects.all()
@@ -82,7 +88,8 @@ def add_resident(request):
                     birth_date=birth_date,
                     gender=form.cleaned_data['gender'], 
                     purok=form.cleaned_data['purok'], 
-                    phone_number=form.cleaned_data['phone_number']
+                    phone_number=form.cleaned_data['phone_number'],
+                    status=form.cleaned_data['status']
                 )
                 messages.success(request, f'Resident {first_name.capitalize()} {last_name.capitalize()} has been added successfully.')
                 return redirect('barangay-residents')

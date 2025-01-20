@@ -34,18 +34,19 @@
     
     <!-- resident list -->
     <div class="pt-5 border p-5 rounded-xl shadow-md">
-        <div class="grid grid-cols-8 mb-5 font-bold border-b border-gray-300 pb-3">
+        <div class="grid grid-cols-9 mb-5 font-bold border-b border-gray-300 pb-3 gap-x-3">
             <div>Last Name</div>
             <div>First Name</div>
             <div>Middle Name</div>
             <div>Birth Date</div>
             <div>Gender</div>
             <div>Purok</div>
+            <div>Status</div>
             <div>Phone Number</div>
             <div class="text-center">Actions</div>
         </div>
         
-        <div class="grid grid-cols-8 resident-grid gap-y-4 gap-x-3 overflow-y-auto h-96">
+        <div class="grid grid-cols-9 resident-grid gap-y-4 gap-x-3 overflow-y-auto h-96">
             {% for resident in residents %}
             <div>{{ resident.last_name|title }}</div>
             <div>{{ resident.first_name|title }}</div>
@@ -53,6 +54,7 @@
             <div>{{ resident.birth_date }}</div>
             <div>{{ resident.gender }}</div>
             <div>{{ resident.purok }}</div>
+            <div>{{ resident.status }}</div>
             <div>{{ resident.phone_number }}</div>
             <div class="grid grid-cols-2">
                 <a href="{% url 'update-barangay-resident' resident.id %}">

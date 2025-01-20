@@ -97,6 +97,36 @@
         </div>
     </div>
 
+    <div class="bg-purple-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            Solo Parents:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/senior.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ solo_parents }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-orange-500 text-center rounded-3xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">
+            PWD:
+        </h2>
+        
+        <div class="flex justify-center items-center space-x-4">
+            <div>
+                <img src="{% static 'images/senior.png' %}" class="w-16 h-16" alt="Total Population">
+            </div>
+            <div class="text-4xl font-semibold text-white">
+                {{ pwd }}
+            </div>
+        </div>
+    </div>
+
     
 </div>
 {% endblock content %}
