@@ -18,7 +18,7 @@
         <div>Quantity</div>
     </div>
     
-    <div class="grid grid-cols-6 resident-grid gap-y-4 gap-x-10">
+    <div class="grid grid-cols-6 resident-grid gap-y-4 gap-x-10 overflow-y-auto h-96">
         {% for request in medicine_requests %}
         <div>{{ request.request_date }}</div>
         <div>{{ request.resident.last_name }}, {{ request.resident.first_name }} {{ request.resident.middle_name }}</div>

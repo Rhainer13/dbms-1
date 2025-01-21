@@ -102,8 +102,8 @@ class Medicine(models.Model):
         return f'{self.generic_name} ({self.quantity})'
     
 class MedicineRequest(models.Model):
-    resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
-    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
+    resident = models.ForeignKey(Resident, on_delete=models.SET_NULL, null=True)
+    medicine = models.ForeignKey(Medicine, on_delete=models.SET_NULL, null=True)
     quantity = models.PositiveIntegerField()
     request_date = models.DateField(auto_now_add=True)
 
@@ -111,9 +111,19 @@ class MedicineRequest(models.Model):
         return f'{self.resident} requests {self.quantity} of {self.medicine}'
 
 class ChildVaccineHistory(models.Model):
+    VACCINE_CHOICES = [
+        ('BCG Vaccine', 'BCG Vaccine'),
+        ('Hepatitis B Vaccine', 'Hepatitis B Vaccine'),
+        ('Pentavalent Vaccine (DPT -Hep B-HIB)', 'HepatitisPentavalent Vaccine (DPT -Hep B-HIB)'),
+        ('Oral Polio Vaccine', 'Oral Polio Vaccine'),
+        ('Inactivated Polio Vaccine (IPV)', 'Inactivated Polio Vaccine (IPV)'),
+        ('Pneumococcal Conjugate Vaccine (PCV)', 'Pneumococcal Conjugate Vaccine (PCV)'),
+        ('Measles, Mumps, Rubella Vaccine (MMR)', 'Measles, Mumps, Rubella Vaccine (MMR)'),
+    ]
+
     resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
     visit_number = models.PositiveIntegerField()
-    vaccine_name = models.TextField(max_length=100)
+    vaccine_name = models.TextField(max_length=100, choices=VACCINE_CHOICES)
     health_worker = models.ForeignKey(Staff, null=True, on_delete=models.SET_NULL)
     date_given = models.DateField(auto_now_add=True)
     

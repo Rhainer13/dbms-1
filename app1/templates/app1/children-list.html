@@ -7,6 +7,23 @@
     <h1 class="text-center font-bold text-3xl p-5">CHILD VACCINE RECORD</h1>
 </a>
 
+<div class="flex justify-between pt-5">
+    <div>
+        <form method="GET" action="{% url 'children-list' %}">
+            <input class="" type="text" name="q" placeholder="Search Child...">
+        </form>
+    </div>
+</div>
+
+<div class="py-5 pl-3 flex">
+    <div>
+        Children Count: {{ children_count }}
+    </div>
+    <div class="m-1">
+        <img class="size-4" src="{% static '/images/resident_count.png' %}" alt="">
+    </div>
+</div>
+
 <div class="pt-5 border p-5 rounded-xl shadow-md">
     <div class="grid grid-cols-3 mb-5 font-bold border-b border-gray-300 pb-3">
         <div>Name</div>

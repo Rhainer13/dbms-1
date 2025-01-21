@@ -272,10 +272,22 @@ def children_list(request):
     # Calculate the date 18 years ago from today
     eighteen_years_ago = date.today() - timedelta(days=18*365.25)
 
-    children = Resident.objects.filter(birth_date__gt=eighteen_years_ago)
+    q = request.GET.get('q')
+
+    if q:
+        children = Resident.objects.filter(
+            Q(first_name__icontains=q) |
+            Q(middle_name__icontains=q) |
+            Q(last_name__icontains=q)
+        ).filter(birth_date__gt=eighteen_years_ago)
+    else:
+        children = Resident.objects.filter(birth_date__gt=eighteen_years_ago)
     
+    children_count = children.count()
+
     context = {
         'children': children,
+        'children_count':children_count,
     }
     
     return render(request, 'app1/children-list.html', context)
