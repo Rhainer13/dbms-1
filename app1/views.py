@@ -326,7 +326,18 @@ def visit_history(request, pk):
                 
 
 def document_request_history(request):
-    document_requests = DocumentRequest.objects.all()
+    q = request.GET.get('q')
+
+    if q:
+        document_requests = DocumentRequest.objects.filter(
+            Q(resident__first_name__icontains=q) |
+            Q(resident__middle_name__icontains=q) |
+            Q(resident__last_name__icontains=q) |
+            Q(document_name__icontains=q) |
+            Q(request_date__icontains=q)
+        )
+    else:
+        document_requests = DocumentRequest.objects.all()
 
     context = {
         'document_requests': document_requests,

@@ -152,18 +152,9 @@ class DocumentRequest(models.Model):
         ('SPES', 'SPES'),
     ]
 
-    PURPOSE_CHOICES = [
-        ('Employment', 'Employment'),
-        ('Government', 'Government'),
-        ('Identification', 'Identification'),
-        ('Personal', 'Personal'),
-        ('School', 'School'),
-    ]
-
     request_date = models.DateField(auto_now_add=True)
     resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
     document_name = models.TextField(max_length=50, choices=DOCUMENT_CHOICES, blank=False)
-    purpose = models.TextField(max_length=100, choices=PURPOSE_CHOICES, blank=True)
     
     class Meta:
         ordering = ['-request_date']
