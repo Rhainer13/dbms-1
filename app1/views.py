@@ -331,12 +331,16 @@ def document_request(request):
             last_name = form.cleaned_data['resident'].last_name
             purpose = form.cleaned_data['purpose']
             document_name = form.cleaned_data['document_name']
-            
+            gender = form.cleaned_data['resident'].gender
+            purok = form.cleaned_data['resident'].purok
+
             # Save the form and get the saved instance
             document_request_instance = form.save()
 
             # Query the saved instance to get the request_date
             request_date = document_request_instance.request_date
+
+            formatted_request_date = request_date.strftime("%B %d, %Y")
 
             file_name = f'{document_name}.docx'
             output_name = f'[{request_date}] {last_name.capitalize()}, {first_name.capitalize()} {middle_name.capitalize()}.docx'
@@ -351,7 +355,9 @@ def document_request(request):
                 'middle_name' : middle_name,
                 'last_name' : last_name,
                 'purpose' : purpose,
-                'request_date' : request_date,
+                'formatted_request_date' : formatted_request_date,
+                'gender' : gender,
+                'purok' : purok,
             }
 
             doc.render(context)

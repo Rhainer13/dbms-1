@@ -99,7 +99,7 @@ class Medicine(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        return self.generic_name
+        return f'{self.generic_name} ({self.quantity})'
     
 class MedicineRequest(models.Model):
     resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
@@ -125,7 +125,21 @@ class ChildVaccineHistory(models.Model):
     
 class DocumentRequest(models.Model):
     DOCUMENT_CHOICES = [
-        ('Indigency', 'Indigency'),
+        ('BAILBOND', 'BAILBOND'),
+        ('CP GIFTS', 'CP GIFTS'),
+        ('EMPLOYMENT', 'EMPLOYMENT'),
+        ('GOOD MORAL', 'GOOD MORAL'),
+        ('INDIGENCY FINANCIAL', 'INDIGENCY FINANCIAL'),
+        ('INDIGENCY MEDICAL', 'INDIGENCY MEDICAL'),
+        ('LOAN', 'LOAN'),
+        ('NO INCOME', 'NO INCOME'),
+        ('OJT', 'OJT'),
+        ('PAO', 'PAO'),
+        ('POLICE CLEARANCE', 'POLICE CLEARANCE'),
+        ('PROBATION', 'PROBATION'),
+        ('RESIDENCY', 'RESIDENCY'),
+        ('RICE ASSISTANCE', 'RICE ASSISTANCE'),
+        ('SPES', 'SPES'),
     ]
 
     PURPOSE_CHOICES = [
@@ -139,7 +153,7 @@ class DocumentRequest(models.Model):
     request_date = models.DateField(auto_now_add=True)
     resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
     document_name = models.TextField(max_length=50, choices=DOCUMENT_CHOICES, blank=False)
-    purpose = models.TextField(max_length=100, choices=PURPOSE_CHOICES,blank=True)
+    purpose = models.TextField(max_length=100, choices=PURPOSE_CHOICES, blank=True)
     
     class Meta:
         ordering = ['-request_date']
