@@ -26,20 +26,18 @@
     
     <!-- resident list -->
     <div class="pt-5 border p-5 rounded-xl shadow-md">
-        <div class="grid grid-cols-4 mb-5 font-bold border-b border-gray-300 pb-3">
+        <div class="grid grid-cols-3 mb-5 font-bold border-b border-gray-300 pb-3">
             <div>Date Requested</div>
             <div>Resident Name</div>
             <div>Document</div>
-            <div>Purpose</div>
             <!-- <div class="text-center">Actions</div> -->
         </div>
         
-        <div class="grid grid-cols-4 resident-grid gap-y-4 overflow-y-auto h-96">
+        <div class="grid grid-cols-3 resident-grid gap-y-4 overflow-y-auto h-96">
             {% for request in document_requests %}
             <div>{{ request.request_date }}</div>
             <div>{{ request.resident.last_name|title }}, {{ request.resident.first_name|title }} {{ request.resident.middle_name|title }}</div>
             <div>{{ request.document_name }}</div>
-            <div>{{ request.purpose }}</div>
             <!-- <div class="grid grid-cols-2">
                 <a href="#">
                     <div class="bg-blue-500 text-white m-0.5 p-3 font-semibold rounded" align="center">

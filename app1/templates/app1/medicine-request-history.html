@@ -3,12 +3,14 @@
 
 {% block content %}
 
-<a href="{% url 'barangay-medicine-inventory' %}">
-    <h1 class="text-center font-bold text-3xl p-5">MEDICINE REQUEST HISTORY</h1>
-</a>
+<header class="bg-orange-500 text-white py-6 shadow-md">
+    <a href="{% url 'barangay-medicine-inventory' %}">
+        <h1 class="text-center font-bold text-3xl">MEDICINE REQUEST HISTORY</h1>
+    </a>
+</header>
 
 <!-- medicine list -->
-<div class="pt-5 border p-5 rounded-xl shadow-md">
+<div class="mt-5 border p-5 rounded-xl shadow-md">
     <div class="grid grid-cols-6 mb-5 font-bold border-b border-gray-300 pb-3 gap-x-10">
         <div>Date Requested</div>
         <div>Receiver</div>
