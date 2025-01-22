@@ -23,8 +23,8 @@
     <div class="grid grid-cols-6 resident-grid gap-y-4 gap-x-10 overflow-y-auto h-96">
         {% for request in medicine_requests %}
         <div>{{ request.request_date }}</div>
-        <div>{{ request.resident.last_name }}, {{ request.resident.first_name }} {{ request.resident.middle_name }}</div>
-        <div>{{ request.medicine.generic_name }}</div>
+        <div>{{ request.resident.last_name|title }}, {{ request.resident.first_name|title }} {{ request.resident.middle_name|title }}</div>
+        <div>{{ request.medicine.generic_name|title }}</div>
         <div>{{ request.medicine.type }}</div>
         <div>{{ request.medicine.dosage }}</div>
         <div>{{ request.quantity }}</div>

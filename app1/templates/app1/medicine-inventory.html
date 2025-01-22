@@ -54,8 +54,8 @@
     
     <div class="grid grid-cols-8 resident-grid gap-y-4 gap-x-3 overflow-y-auto h-96">
         {% for medicine in medicines %}
-        <div>{{ medicine.name }}</div>
-        <div>{{ medicine.generic_name }}</div>
+        <div>{{ medicine.name|title }}</div>
+        <div>{{ medicine.generic_name|title }}</div>
         <div>{{ medicine.dosage }}</div>
         <div>{{ medicine.type }}</div>
         <div>{{ medicine.date_added }}</div>
