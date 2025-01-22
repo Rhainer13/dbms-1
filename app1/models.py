@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Resident(models.Model):
@@ -87,13 +88,23 @@ class Staff(models.Model):
         return f'{self.last_name.capitalize()}, {self.first_name.capitalize()} {self.middle_name.capitalize()}'
 
 class Medicine(models.Model):
+    TYPE_CHOICES = [
+        ('Tablet', 'Tablet'),
+        ('Capsule', 'Capsule'),
+        ('Vial', 'Vial'),
+        ('Syrup', 'Syrup'),
+        ('Ointment', 'Ointment'),
+        ('Cream', 'Cream'),
+        ('Drops', 'Drops'),
+    ]
+
     name = models.CharField(max_length=50)
     generic_name = models.CharField(blank=True)
     dosage = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
+    type = models.CharField(max_length=50, choices=TYPE_CHOICES)
     date_added = models.DateField(auto_now_add=True)
     expiry_date = models.DateField()
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(validators=[MaxValueValidator(100)])
     
     class Meta:
         ordering = ['name']
