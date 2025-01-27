@@ -410,8 +410,12 @@ def staff(request):
     else:
         staff = Staff.objects.all()
 
+    # staff count
+    staff_count = staff.count()
+
     context = {
         'staff': staff, 
+        'staff_count': staff_count,
     }
     return render(request, 'app1/staff.html', context)
 

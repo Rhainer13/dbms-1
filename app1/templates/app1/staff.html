@@ -7,7 +7,7 @@
         <h1 class="text-center font-bold text-3xl p-5">LIST OF STAFF</h1>
     </a>
     
-    <div class="flex justify-between pt-5 mb-5">
+    <div class="flex justify-between pt-5 ">
         <div>
             <a href="{% url 'add-staff' %}">
                 <div class="bg-green-500 text-white font-bold py-2 px-4 rounded">
@@ -20,6 +20,16 @@
             <form method="GET" action="{% url 'staff' %}">
                 <input class="" type="text" name="q" placeholder="Search Resident...">
             </form>
+        </div>
+    </div>
+
+    <!-- staff count -->
+    <div class="py-5 pl-3 flex">
+        <div>
+            Staff Count: {{ staff_count }}
+        </div>
+        <div class="m-1">
+            <img class="size-4" src="{% static '/images/resident_count.png' %}" alt="">
         </div>
     </div>
     
