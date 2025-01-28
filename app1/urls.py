@@ -31,4 +31,8 @@ urlpatterns = [
 
     path('', views.login_page, name='login'),
     path('logout/', views.logout_page, name='logout'),
+
+    path('export-residents/excel/', views.export_residents_to_excel, name='export-residents'),
+    path('export-staff/excel/', views.export_staff_to_excel, name='export-staff'),
+    path('export-child-vaccine-history/excel/<int:pk>/', views.export_child_vaccine_history, name='export-child-vaccine-history'),
 ]

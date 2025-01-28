@@ -118,6 +118,9 @@ class MedicineRequest(models.Model):
     quantity = models.PositiveIntegerField()
     request_date = models.DateField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-request_date']
+
     def __str__(self):
         return f'{self.resident} requests {self.quantity} of {self.medicine}'
 

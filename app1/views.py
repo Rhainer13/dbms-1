@@ -8,6 +8,8 @@ from docxtpl import DocxTemplate
 import os
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+import pandas as pd
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -519,3 +521,93 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+def export_residents_to_excel(request):
+    # Query the data
+    data = Resident.objects.all()
+
+    # Prepare data for the DataFrame
+    data_list = []
+    
+    for item in data:
+        data_list.append({
+            'first_name': item.first_name,
+            'middle_name': item.middle_name,
+            'last_name': item.last_name,
+            'birth_date': item.birth_date,
+            'gender': item.gender,
+            'purok': item.purok,
+            'phone_number': item.phone_number,
+            'status': item.status,
+        })
+
+    # Convert to DataFrame
+    df = pd.DataFrame(data_list)
+
+    # Create a HttpResponse object with Excel content type
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=resident_list.xlsx'
+
+    # Write DataFrame to Excel
+    df.to_excel(response, index=False, engine='openpyxl')
+
+    return response
+    
+def export_staff_to_excel(request):
+    # Query the data
+    data = Staff.objects.all()
+
+    # Prepare data for the DataFrame
+    data_list = []
+    
+    for item in data:
+        data_list.append({
+            'first_name': item.first_name,
+            'middle_name': item.middle_name,
+            'last_name': item.last_name,
+            'birth_date': item.birth_date,
+            'gender': item.gender,
+            'role': item.role,
+            'phone_number': item.phone_number,
+        })
+
+    # Convert to DataFrame
+    df = pd.DataFrame(data_list)
+
+    # Create a HttpResponse object with Excel content type
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=staff_list.xlsx'
+
+    # Write DataFrame to Excel
+    df.to_excel(response, index=False, engine='openpyxl')
+
+    return response
+
+def export_child_vaccine_history(request, pk):
+    # Query the data
+    child = Resident.objects.get(id=pk)
+    data = ChildVaccineHistory.objects.filter(resident=pk)
+    file_name = f'{child.last_name}_{child.first_name}_{child.middle_name}'
+
+    # Prepare data for the DataFrame
+    data_list = []
+    
+    for item in data:
+        data_list.append({
+            'visit_number': item.visit_number,
+            'vaccine_name': item.vaccine_name,
+            'health_worker': f'{item.health_worker.first_name} {item.health_worker.middle_name} {item.health_worker.last_name}',
+            'date_given': item.date_given,
+        })
+
+    # Convert to DataFrame
+    df = pd.DataFrame(data_list)
+
+    # Create a HttpResponse object with Excel content type
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename={file_name}_vaccine_history.xlsx'
+
+    # Write DataFrame to Excel
+    df.to_excel(response, index=False, engine='openpyxl')
+
+    return response
