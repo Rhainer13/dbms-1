@@ -36,4 +36,5 @@ urlpatterns = [
     path('export-staff/excel/', views.export_staff_to_excel, name='export-staff'),
     path('export-child-vaccine-history/excel/<int:pk>/', views.export_child_vaccine_history, name='export-child-vaccine-history'),
     path('export-document-request-history/excel/', views.export_document_request_history, name='export-document-request-history'),
+    path('export-medicine-request-history/excel/', views.export_medicine_request_history, name='export-medicine-request-history'),
 ]

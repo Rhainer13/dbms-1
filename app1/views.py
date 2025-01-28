@@ -640,7 +640,45 @@ def export_document_request_history(request):
 
     # Create a HttpResponse object with Excel content type
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = f'attachment; filename={file_name} document_history.xlsx'
+    response['Content-Disposition'] = f'attachment; filename={file_name} document_request_history.xlsx'
+
+    # Write DataFrame to Excel
+    df.to_excel(response, index=False, engine='openpyxl')
+
+    return response
+
+def export_medicine_request_history(request):
+    today = date.today()
+    
+    # Query the data
+    data = MedicineRequest.objects.filter(
+        request_date__year=today.year,
+        request_date__month=today.month
+    )
+
+    file_name = f'[{today.month}_{today.year}]'
+
+    # Prepare data for the DataFrame
+    data_list = []
+    
+    for item in data:
+        data_list.append({
+            'request_date': item.request_date,
+            'first_name': item.resident.first_name,
+            'middle_name': item.resident.middle_name,
+            'last_name': item.resident.last_name,
+            'medicine': item.medicine.generic_name,
+            'type': item.medicine.type,
+            'dosage': item.medicine.dosage,
+            'quantity': item.quantity,
+        })
+
+    # Convert to DataFrame
+    df = pd.DataFrame(data_list)
+
+    # Create a HttpResponse object with Excel content type
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename={file_name} medicine_request_history.xlsx'
 
     # Write DataFrame to Excel
     df.to_excel(response, index=False, engine='openpyxl')
