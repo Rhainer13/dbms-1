@@ -60,7 +60,7 @@
         <div>{{ medicine.type }}</div>
         <div>{{ medicine.date_added }}</div>
         <div>{{ medicine.expiry_date }}</div>
-        <div>{{ medicine.quantity }}</div>
+        <div class="{% if medicine.quantity < 10 %}text-red-500{% endif %}">{{ medicine.quantity }}</div>
         <div class="grid grid-cols-2">
             <a href="{% url 'barangay-update-medicine' medicine.id %}">
                 <div class="bg-blue-500 text-white m-0.5 p-3 font-semibold rounded" align="center">
